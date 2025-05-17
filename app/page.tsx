@@ -1,103 +1,157 @@
+import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight, Calendar, MapPin, Star, Clock } from "lucide-react";
+import FeaturedExhibitions from "@/components/featured-exhibitions";
+import Carousel from "@/components/carousel";
 
-export default function Home() {
+export default async function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="flex flex-col min-h-screen">
+      {/* Featured Exhibitions */}
+      <section className="py-16 px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="font-playfair text-3xl font-bold">요즘 인기 전시</h2>
+            <Link
+              href="/exhibitions"
+              className="text-gray-600 hover:text-gray-700 flex items-center gap-1"
+            >
+              더보기 <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <FeaturedExhibitions />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+      {/* Ending Soon */}
+      <section className="py-16 px-6 bg-gray-900 text-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="font-playfair text-3xl font-bold">
+              곧 종료되는 전시/공연
+            </h2>
+            <Link
+              href="/ending-soon"
+              className="text-gray-400 hover:text-gray-300 flex items-center gap-1"
+            >
+              더보기 <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <Carousel itemsToShow={3} showArrows={true} showDots={true}>
+            {[1, 2, 3, 4, 5].map((item) => (
+              <Card
+                key={item}
+                className="bg-gray-800 border-gray-700 overflow-hidden h-full"
+              >
+                <div className="relative h-48">
+                  <Image
+                    src={`/placeholder.svg?key=p5zpj&height=400&width=600&query=art exhibition ending soon ${item}`}
+                    alt={`Ending soon exhibition ${item}`}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">
+                    D-{Math.floor(Math.random() * 7) + 1}
+                  </div>
+                </div>
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-2 text-gray-400 text-sm mb-2">
+                    <Calendar className="h-4 w-4" />
+                    <span>~2024.05.{10 + item}</span>
+                    <MapPin className="h-4 w-4 ml-2" />
+                    <span>서울시립미술관</span>
+                  </div>
+                  <h3 className="font-playfair text-xl font-bold mb-2 text-white">
+                    다신 안 할지도 몰라요! 특별전 {item}
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-4 line-clamp-2">
+                    이번이 마지막 기회일지도 모릅니다. 놓치지 마세요!
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-1">
+                      <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
+                      <span className="text-yellow-500 font-bold">
+                        {(4 + Math.random()).toFixed(1)}
+                      </span>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      className="text-orange-400 hover:text-orange-300 p-0"
+                    >
+                      자세히 보기
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </Carousel>
+        </div>
+      </section>
+
+      {/* User Reviews */}
+      <section className="py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-playfair text-3xl font-bold mb-4">
+              사용자 후기
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              OnView 사용자들의 생생한 전시, 공연 감상을 확인해보세요
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3].map((item) => (
+              <div
+                key={item}
+                className="bg-white rounded-lg shadow-md p-6 border border-gray-100"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden">
+                    <Image
+                      src={`/abstract-profile-avatar.png?height=100&width=100&query=profile avatar ${item}`}
+                      alt="User avatar"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="font-bold">사용자{item}</h4>
+                    <div className="flex items-center gap-1">
+                      {Array(5)
+                        .fill(0)
+                        .map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`h-4 w-4 ${
+                              i < 4
+                                ? "text-yellow-500 fill-yellow-500"
+                                : "text-gray-300"
+                            }`}
+                          />
+                        ))}
+                    </div>
+                  </div>
+                </div>
+                <h3 className="font-playfair text-lg font-bold mb-2">
+                  인상적인 전시회였습니다
+                </h3>
+                <p className="text-gray-600 mb-4 line-clamp-3">
+                  정말 감동적인 전시였습니다. 특히 3관의 작품들이 인상적이었고,
+                  작가의 의도가 잘 전달되었다고 생각합니다. 다음에 또 방문하고
+                  싶어요.
+                </p>
+                <div className="flex items-center text-sm text-gray-500">
+                  <Clock className="h-4 w-4 mr-1" />
+                  <span>2024.04.{10 + item}</span>
+                  <MapPin className="h-4 w-4 ml-3 mr-1" />
+                  <span>국립현대미술관</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
