@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
+import MobileNav from "@/components/mobile-nav";
 import Footer from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -44,6 +45,7 @@ export default function RootLayout({
         >
           <Header />
           <main className="min-h-screen pb-16 lg:pb-0">{children}</main>
+          <MobileNav />
           <Footer className="hidden lg:block" />
         </ThemeProvider>
       </body>
